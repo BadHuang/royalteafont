@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.royaltea.dao.ShopMapper">
+	<!-- <resultMap type="food" id="FoodMapper">
+		<result property="foodId" column="EMP_ID"/>
+		<result property="foodLid" column="EMP_LID"/>
+		<result property="roleName" column="ROLE_NAME"/>
+		<result property="foodSex" column="EMP_SEX"/>
+		<result property="foodPwd" column="EMP_PWD"/>
+		<result property="foodName" column="EMP_NAME"/>
+		<result property="foodSalary" column="EMP_SALARY"/>
+		<result property="foodWorktime" column="EMP_WORKTIME"/>
+		<result property="foodBirthtime" column="EMP_BIRTHTIME"/>
+		<result property="foodTel" column="EMP_TEL"/>
+	</resultMap>  -->
+    <!-- 查询所有food resultMap="FoodMapper"-->  
+    <!-- List<Food> loadDc();
+	
+	Date getTime(Integer dId);
+	
+	List<Food> loadFoodByType(Integer ftId);
+	
+	List<FoodType> loadFt();
+	
+	List<Food> loadHot(); -->
+    <select id="loadDc" resultType="int"  >  
+    	<![CDATA[
+    	select F_ID from food
+		where F_STATUS=0 and F_DC!=10.0 order by F_ID
+		]]>
+    </select>
+    
+    <select id="search" parameterType="string" resultType="int"  >  
+    	<![CDATA[
+    	select F_ID from food
+		where F_STATUS=0 and F_NAME like CONCAT('%',#{name},'%') order by F_ID
+		]]>
+    </select>
+    
+    <select id="loadHot" resultType="food"  >  
+    <![CDATA[
+    	select sum(oi.F_NUM) sales,f.* from orderinfo oi,orders o,food f 
+		where DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(o.O_TIME) and o.O_ID=oi.O_ID and oi.F_ID=f.F_ID and f.F_STATUS=0 
+		group by oi.F_ID 
+		order by sales desc limit 5
+		]]>
+    </select>
+    
+    <select id="loadFt" resultType="foodtype">
+    	<![CDATA[ select * from foodtype ]]>
+    </select>
+    
+    <select id="loadFoodByType" parameterType="int" resultType="int">
+    <![CDATA[
+    	select F_ID from food
+		where FT_ID=#{ftId} and F_STATUS=0 order by F_ID
+		]]>
+    </select>
+    
+    <select id="loadFoodById" parameterType="int" resultType="food">
+    <![CDATA[
+    	select sum(oi.F_NUM) sales,f.* from orderinfo oi,orders o,food f 
+		where DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= date(o.O_TIME) and o.O_ID=oi.O_ID and oi.F_ID=f.F_ID and f.F_STATUS=0
+		and f.F_ID=#{fId}
+		]]>
+    </select>
+    
+    <select id="getTime" parameterType="int" resultType="java.util.Date">
+    	select D_TIME from desk where D_ID=#{dId}
+    </select>
+    
+    <select id="isStatus" parameterType="int" resultType="int">
+    	select D_STATUS from desk where D_ID=#{dId}
+    </select>
+    
+    <insert id="addOrder" parameterType="order">
+    	insert into orders (O_ID,OD_ID,O_OUT,O_TIME,O_TOTAL,O_DTOTAL,O_DEC)
+    	 values(#{oId},#{odId},#{oOut},#{oTime},#{oTotal},#{oDtotal},#{oDec})
+    </insert>
+    
+    <insert id="addOrderInfo" parameterType="orderinfo">
+    	insert into orderinfo (O_ID,F_ID,F_NUM)
+    	 values(#{oId},#{fId},#{fNum})
+    </insert>
+    
+    <select id="loadOrder" resultType="order"  >  
+        select * from orders where O_ID=#{oId} order by O_TIME desc
+    </select>
+    
+    <select id="loadOi" parameterType="string" resultType="orderinfo"  >  
+        select * from orderinfo left join food on orderinfo.F_ID=food.F_ID
+        left join foodtype on food.FT_ID=foodType.FT_ID where O_ID=#{oId}
+    </select>
+</mapper>
