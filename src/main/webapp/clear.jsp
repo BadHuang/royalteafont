@@ -3,7 +3,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-	<c:set var="localhost" value="192.168.1.5"/>
+	<c:set var="localhost" value="129.204.127.42"/>
 	<head lang="en">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -85,18 +85,19 @@
 													<c:forEach items="${orderInfo}" var="f">
 														
 															<tr>
-																<td width="25%"><img src="http://${localhost }:8080/royalbd/upload/${f.fImg }" width="50px" height="50px" /></td>
+																<td width="25%"><img src="http://royalbd.hzryxx.cn/upload/${f.fImg }" width="50px" height="50px" /></td>
 																<td width="25%">${f.fName }</td>
 																<td width="15%" data-id="${f.fId }" data-price="${f.fPrice }" data-dprice="${f.fDprice }" data-name="${f.fName }" data-img="${f.fImg }">
 																	<span class="num" style="visibility:visible;">*${f.num }</span>
 																</td>
 																<td >
-																	<span style="color: black;font-size: 1.3em;">¥<span>${f.fPrice*f.num }</span></span>
 																	<c:if test="${f.fPrice!=f.fDprice }">
-																	<span style="color: #9F9F9F;text-decoration:line-through;display:inline;font-size: 0.8em;">¥<span>${f.fDprice*f.num }</span></span>
+																	<span style="color: black;font-size: 1.3em;">¥<span>${f.fDprice*f.num }</span></span>
+																	<span style="color: #9F9F9F;text-decoration:line-through;display:inline;font-size: 0.8em;">¥<span>${f.fPrice*f.num }</span></span>
 																	</c:if>
 																	<c:if test="${f.fPrice==f.fDprice }">
-																	<span style="color: #9F9F9F;text-decoration:line-through;display:none;font-size: 0.8em;">¥<span>${f.fDprice*f.num }</span></span>
+																	<span style="color: black;font-size: 1.3em;">¥<span>${f.fDprice*f.num }</span></span>
+																	<span style="color: #9F9F9F;text-decoration:line-through;display:none;font-size: 0.8em;">¥<span>${f.fPrice*f.num }</span></span>
 																	</c:if>
 																</td>
 															</tr>
@@ -108,11 +109,16 @@
 												<div></div>
 												<div class="ml-auto">
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												&nbsp;&nbsp;&nbsp;&nbsp;
-													<span style="color: black;font-size: 1.5em;">小计：&nbsp;¥<span id="total1">${cartotal }</span></span>
-													
-													
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												
+													<c:if test="${cartotal==cardtotal }">
+													<span style="color: black;font-size: 1.3em;">小计：&nbsp;¥<span id="dtotal1">${cardtotal }</span></span>
+													<span style="color: #9F9F9F;font-size: 0.8em;text-decoration:line-through;font-size: 1em;display: none;">¥<span id="total1">${cartotal }</span></span>
+													</c:if>
+													<c:if test="${cartotal!=cardtotal }">
+													<span style="color: black;font-size: 1.3em;">小计：&nbsp;¥<span id="dtotal1">${cardtotal }</span></span>
+													<span style="color: #9F9F9F;font-size: 0.8em;text-decoration:line-through;font-size: 1em;display: inline;">¥<span id="total1">${cartotal }</span></span>
+													</c:if>
 												</div>
 												<br/>
 												就餐方式：
@@ -181,8 +187,6 @@
 		function finish(){
 			var out = $('input[name="out"]:checked').val();
 			var dec = $('textarea[name="dec"]').val();
-			alert(out);
-			alert(dec);
 			$.ajax({
                 type:"POST",
                 url:"order-add",
@@ -205,8 +209,8 @@
 			var data = total.data("total");
 			if (data!=null&&data!=''){
 				var prices = data.split(',');
-				total.html(prices[0]);
-				dtotal.html(prices[1]);
+				total.html(prices[1]);
+				dtotal.html(prices[0]);
 	        	if(prices[0]!=prices[1]){
 	        		dtotal.parent().css('display','inline');
 	        	}else{

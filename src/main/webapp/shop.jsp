@@ -3,7 +3,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-	<c:set var="localhost" value="192.168.1.5"/>
+	<c:set var="localhost" value="129.204.127.42"/>
 	<head lang="en">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -106,7 +106,7 @@
 						</tr>
 						<c:forEach items="${hotInfo}" var="f">
 						<tr onclick="showFood(this)" data-id="${f.fId }" data-sales="${f.sales }" data-dec="${f.fDec }" data-name="${f.fName }" data-img="${f.fImg }" data-price="${f.fPrice }" data-dprice="${f.fDprice }">
-							<td rowspan="3"><img src="http://${localhost }:8080/royalbd/upload/${f.fImg }" width="100px" height="100px" /></td>
+							<td rowspan="3"><img src="http://royalbd.hzryxx.cn/upload/${f.fImg }" width="100px" height="100px" /></td>
 							<td><strong style="font-size: 1.5em;">${f.fName }</strong></td>
 						</tr>
 						<tr>
@@ -119,9 +119,12 @@
 						</tr>
 						<tr>
 							<td>
+								<c:if test="${f.fPrice==f.fDprice }">
 								<span style="color: red;font-size: 1.5em;">${f.fPrice }</span>
+								</c:if>
 								<c:if test="${f.fPrice!=f.fDprice }">
-								<span style="color: #9F9F9F;text-decoration:line-through;">${f.fDprice }</span>
+								<span style="color: red;font-size: 1.5em;">${f.fDprice }</span>
+								<span style="color: #9F9F9F;text-decoration:line-through;">${f.fPrice }</span>
 								</c:if>
 							</td>
 							<td data-id="${f.fId }" data-price="${f.fPrice }" data-dprice="${f.fDprice }" data-name="${f.fName }" data-img="${f.fImg }">
@@ -145,7 +148,7 @@
 						</tr>
 						<c:forEach items="${dcInfo}" var="f">
 						<tr onclick="showFood(this)" data-id="${f.fId }" data-sales="${f.sales }" data-dec="${f.fDec }" data-name="${f.fName }" data-img="${f.fImg }" data-price="${f.fPrice }" data-dprice="${f.fDprice }">
-							<td rowspan="3"><img src="http://${localhost }:8080/royalbd/upload/${f.fImg }" width="100px" height="100px" /></td>
+							<td rowspan="3"><img src="http://royalbd.hzryxx.cn/upload/${f.fImg }" width="100px" height="100px" /></td>
 							<td><strong style="font-size: 1.5em;">${f.fName }</strong></td></tr>
 						<tr>
 							<c:if test="${f.sales!=null }">
@@ -157,9 +160,12 @@
 						</tr>
 						<tr>
 							<td>
+								<c:if test="${f.fPrice==f.fDprice }">
 								<span style="color: red;font-size: 1.5em;">${f.fPrice }</span>
+								</c:if>
 								<c:if test="${f.fPrice!=f.fDprice }">
-								<span style="color: #9F9F9F;text-decoration:line-through;">${f.fDprice }</span>
+								<span style="color: red;font-size: 1.5em;">${f.fDprice }</span>
+								<span style="color: #9F9F9F;text-decoration:line-through;">${f.fPrice }</span>
 								</c:if>
 							</td>
 							<td data-id="${f.fId }" data-price="${f.fPrice }" data-dprice="${f.fDprice }" data-name="${f.fName }" data-img="${f.fImg }">
@@ -183,7 +189,7 @@
 						</tr>
 						<c:forEach items="${ft.fList}" var="f">
 						<tr onclick="showFood(this)" data-id="${f.fId }" data-sales="${f.sales }" data-dec="${f.fDec }" data-name="${f.fName }" data-img="${f.fImg }" data-price="${f.fPrice }" data-dprice="${f.fDprice }">						
-							<td rowspan="3"><img src="http://${localhost }:8080/royalbd/upload/${f.fImg }" width="100px" height="100px" /></td>
+							<td rowspan="3"><img src="http://royalbd.hzryxx.cn/upload/${f.fImg }" width="100px" height="100px" /></td>
 							<td><strong style="font-size: 1.5em;">${f.fName }</strong></td></tr>
 						<tr>
 							<c:if test="${f.sales!=null }">
@@ -195,9 +201,12 @@
 						</tr>
 						<tr>
 							<td>
+								<c:if test="${f.fPrice==f.fDprice }">
 								<span style="color: red;font-size: 1.5em;">${f.fPrice }</span>
+								</c:if>
 								<c:if test="${f.fPrice!=f.fDprice }">
-								<span style="color: #9F9F9F;text-decoration:line-through;">${f.fDprice }</span>
+								<span style="color: red;font-size: 1.5em;">${f.fDprice }</span>
+								<span style="color: #9F9F9F;text-decoration:line-through;">${f.fPrice }</span>
 								</c:if>
 							</td>
 							<td data-id="${f.fId }" data-price="${f.fPrice }" data-dprice="${f.fDprice }" data-name="${f.fName }" data-img="${f.fImg }">
@@ -244,7 +253,7 @@
 						<c:forEach items="${carInfo}" var="f">
 							
 								<tr>
-									<td><img src="http://${localhost }:8080/royalbd/upload/${f.fImg }" width="50px" height="50px" /></td>
+									<td><img src="http://royalbd.hzryxx.cn/upload/${f.fImg }" width="50px" height="50px" /></td>
 									<td>${f.fName }</td>
 									<td data-id="${f.fId }" data-price="${f.fPrice }" data-dprice="${f.fDprice }" data-name="${f.fName }" data-img="${f.fImg }">
 										<a class="jian${f.fId }" href="javascript:volid(0);"  onclick="jianFood1(this)" style="visibility:visible ;"><img src="assets/img/jian.png" width="22px" height="22px" /></a>
@@ -252,12 +261,13 @@
 										<a class="add${f.fId }" href="javascript:volid(0);"  onclick="addFood1(this)"><img src="assets/img/add.png" width="22px" height="22px" /></a>
 									</td>
 									<td>
-										<span style="color: red;font-size: 1.5em;">¥<span>${f.fPrice*f.num }</span></span>
 										<c:if test="${f.fPrice!=f.fDprice }">
-										<span style="color: #9F9F9F;text-decoration:line-through;display:inline;">¥<span>${f.fDprice*f.num }</span></span>
+										<span style="color: red;font-size: 1.5em;">¥<span>${f.fDprice*f.num }</span></span>
+										<span style="color: #9F9F9F;text-decoration:line-through;display:inline;">¥<span>${f.fPrice*f.num }</span></span>
 										</c:if>
 										<c:if test="${f.fPrice==f.fDprice }">
-										<span style="color: #9F9F9F;text-decoration:line-through;display:none;">¥<span>${f.fDprice*f.num }</span></span>
+										<span style="color: red;font-size: 1.5em;">¥<span>${f.fDprice*f.num }</span></span>
+										<span style="color: #9F9F9F;text-decoration:line-through;display:none;">¥<span>${f.fPrice*f.num }</span></span>
 										</c:if>
 									</td>
 								</tr>
@@ -267,12 +277,13 @@
 					<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<span style="color: black;font-size: 1.5em;">总价：&nbsp;¥<span id="total1">${cartotal }</span></span>&nbsp;
 						<c:if test="${cartotal==cardtotal }">
-						<span style="color: #9F9F9F;text-decoration:line-through;font-size: 1em;display: none;">¥<span id="dtotal1">${cardtotal }</span></span>
+						<span style="color: black;font-size: 1.5em;">总价：&nbsp;¥<span id="dtotal1">${cardtotal }</span></span>&nbsp;
+						<span style="color: #9F9F9F;text-decoration:line-through;font-size: 1em;display: none;">¥<span id="total1">${cartotal }</span></span>
 						</c:if>
 						<c:if test="${cartotal!=cardtotal }">
-						<span style="color: #9F9F9F;text-decoration:line-through;font-size: 1em;display: inline;">¥<span id="dtotal1">${cardtotal }</span></span>
+						<span style="color: black;font-size: 1.5em;">总价：&nbsp;¥<span id="dtotal1">${cardtotal }</span></span>&nbsp;
+						<span style="color: #9F9F9F;text-decoration:line-through;font-size: 1em;display: inline;">¥<span id="total1">${cartotal }</span></span>
 						</c:if>
 					</div>
 					<div class="modal-footer">
@@ -321,8 +332,8 @@
 								<li id="sales">月售</li>
 <!-- 								data-id="" data-price="" data-dprice="" data-name="" data-img="" -->
 								<li >
-								<span id="price" style="color: red;font-size: 1.5em;font-weight:bold;">15.5</span>
-								<span id="dprice" style="color: #9F9F9F;text-decoration:line-through;">14.5</span>
+								<span id="dprice" style="color: red;font-size: 1.5em;font-weight:bold;">15.5</span>
+								<span id="price" style="color: #9F9F9F;text-decoration:line-through;">14.5</span>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<a href="javascript:volid(0);" id="ijian"  onclick="jianFood(this)" style="visibility:hidden;"><img src="assets/img/jian.png" width="22px" height="22px" /></a>
@@ -418,22 +429,24 @@
 		});
 		
 		$(function () {
-			
-        	var total = $('#total');
+			showTotal();
+		});
+		
+		function showTotal(){
+			var total = $('#total');
 			var dtotal = $('#dtotal');
 			var data = total.data("total");
 			if (data!=null&&data!=''){
 				var prices = data.split(',');
-				total.html(prices[0]);
-				dtotal.html(prices[1]);
+				total.html(prices[1]);
+				dtotal.html(prices[0]);
 	        	if(prices[0]!=prices[1]){
 	        		dtotal.parent().css('display','inline');
 	        	}else{
 	        		dtotal.parent().css('display','none');
 	        	}
 			}
-			
-		});
+		}
 		
 		function goShop(){
 			var dId = $('#dId').html();
@@ -462,11 +475,11 @@
 			$('#name').html(name);
 			$('#price').html(price);
 			if(price==dprice){
-				$('#dprice').css("display","none");
+				$('#price').css("display","none");
 			}
 			$('#dprice').html(dprice);
 			var localhost = $("#localhost").val();
-			$('#img').css('background-image','url(http://'+localhost+':8080/royalbd/upload/'+img+')');
+			$('#img').css('background-image','url(http://royalbd.hzryxx.cn/upload/'+img+')');
 			$('#dec').html(dec);
 			$('#sales').html("月售 "+sales);
 			$('#num1').html(num);
@@ -518,8 +531,8 @@
                 	var prices = price.split(',');
                 	var total = $('#total');
         			var dtotal = $('#dtotal');
-        			total.html(prices[0]);
-        			dtotal.html(prices[1]);
+        			total.html(prices[1]);
+        			dtotal.html(prices[0]);
                 	if(prices[0]!=prices[1]){
                 		dtotal.parent().css('display','inline');
                 	}
@@ -534,16 +547,16 @@
 			var add1 = $(obj);
 			var price = add1.parent().data('price');
 			var dprice = add1.parent().data('dprice');
-			var nprice = add1.parent().next().children("span:first-child").children().html();
-			var ndprice = add1.parent().next().children("span:last-child").children().html();
+			var nprice = add1.parent().next().children("span:last-child").children().html();
+			var ndprice = add1.parent().next().children("span:first-child").children().html();
 			var price1 = new Decimal(price);
 			var dprice1 = new Decimal(dprice);
 			var nprice1 = new Decimal(nprice);
 			var ndprice1 = new Decimal(ndprice);
 			var newprice = price1.plus(nprice1);
 			var newdprice = dprice1.plus(ndprice1);
-			add1.parent().next().children("span:first-child").children().html(newprice.toString());
-			add1.parent().next().children("span:last-child").children().html(newdprice.toString());
+			add1.parent().next().children("span:last-child").children().html(newprice.toString());
+			add1.parent().next().children("span:first-child").children().html(newdprice.toString());
 			if(!newprice.equals(newdprice)){
 				add1.parent().next().children("span:last-child").css("display","inline");
 			}
@@ -556,7 +569,7 @@
 			total1.html(newtotal.toString());
 			dtotal1.html(newdtotal.toString());
 			if(total1.html() != dtotal1.html()){
-				dtotal1.parent().css('display','inline');
+				total1.parent().css('display','inline');
 			}
 		}
 		
@@ -594,8 +607,8 @@
                 	var prices = price.split(',');
                 	var total = $('#total');
         			var dtotal = $('#dtotal');
-        			total.html(prices[0]);
-        			dtotal.html(prices[1]);
+        			total.html(prices[1]);
+        			dtotal.html(prices[0]);
                 	if(prices[0]!=prices[1]){
                 		dtotal.parent().css('display','inline');
                 	}else{
@@ -612,16 +625,16 @@
 			var jian1 = $(obj);
 			var price = jian1.parent().data('price');
 			var dprice = jian1.parent().data('dprice');
-			var nprice = jian1.parent().next().children("span:first-child").children().html();
-			var ndprice = jian1.parent().next().children("span:last-child").children().html();
+			var nprice = jian1.parent().next().children("span:last-child").children().html();
+			var ndprice = jian1.parent().next().children("span:first-child").children().html();
 			var price1 = new Decimal(price);
 			var dprice1 = new Decimal(dprice);
 			var nprice1 = new Decimal(nprice);
 			var ndprice1 = new Decimal(ndprice);
 			var newprice = nprice1.minus(price1);
 			var newdprice = ndprice1.minus(dprice1);
-			jian1.parent().next().children("span:first-child").children().html(newprice.toString());
-			jian1.parent().next().children("span:last-child").children().html(newdprice.toString());
+			jian1.parent().next().children("span:last-child").children().html(newprice.toString());
+			jian1.parent().next().children("span:first-child").children().html(newdprice.toString());
 			if(newprice.equals(newdprice)){
 				jian1.parent().next().children("span:last-child").css("display","none");
 			}
@@ -634,7 +647,7 @@
 			total1.html(newtotal.toString());
 			dtotal1.html(newdtotal.toString());
 			if(total1.html() == dtotal1.html()){
-				dtotal1.parent().css('display','none');
+				total1.parent().css('display','none');
 			}
 		}
 

@@ -40,7 +40,7 @@ public class ShopController {
     public String pageList(ModelMap map,Integer dId, HttpSession httpSession){
     	
     	//把桌号放进session中
-    	httpSession.removeAttribute("dId");
+//    	httpSession.removeAttribute("dId");
     	httpSession.setAttribute("dId", dId);
     	//判断桌子是否在预定时间前一个小时
     	if (dId==null) {
@@ -53,10 +53,10 @@ public class ShopController {
     		return "shop";
     	}
     	
-    	httpSession.removeAttribute("car");
-    	httpSession.removeAttribute("total");
-    	httpSession.removeAttribute("oIds");
-    	httpSession.removeAttribute("fkey");
+//    	httpSession.removeAttribute("car");
+//    	httpSession.removeAttribute("total");
+//    	httpSession.removeAttribute("oIds");
+//    	httpSession.removeAttribute("fkey");
     	
     	
     	//优惠
@@ -239,6 +239,9 @@ public class ShopController {
 			httpSession.setAttribute("oIds", oIds);
 		}
     	shopService.addOrder(oId, dId, oOut, ototal, odtotal, oDec, list);
+    	httpSession.removeAttribute("car");
+    	httpSession.removeAttribute("total");
+    	httpSession.removeAttribute("fkey");
     	return "true";
     }
     
